@@ -13,6 +13,7 @@ export class SingleViewComponent implements OnInit {
   book?: BookModel;
 
   readonly loading$ = this.bookCoverService.observeLoading();
+
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -21,12 +22,21 @@ export class SingleViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams
+    if (!this.bookCoverService.books?.length) {
+      this.bookCoverService.fetchAndSetBooks();
+    }
+
+    this.bookCoverService
+      .observeBooks()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (queryParams) =>
-          (this.book = this.bookCoverService.getBookById(queryParams['bookId']))
-      );
+      .subscribe((books) => {
+        this.route.queryParams
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            (queryParams) =>
+              (this.book = books.find((b) => b.id === queryParams['bookId']))
+          );
+      });
   }
 
   ngOnDestroy() {
