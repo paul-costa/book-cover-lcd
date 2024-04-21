@@ -1,0 +1,12 @@
+<div class="container">
+    <div *ngFor="let book of (books$ | async)" class="book" (click)="onBookOpen(book.id ?? '')">
+        <img *ngIf="(loading$| async) === false" [src]="(book.coverUrl | async)" />
+    </div>
+</div>
+
+
+
+<button *ngIf="isAutoNavButtonVisible && (loading$| async) === false" mat-fab color="accent"
+    class="auto-navigation-button" (click)="onStartAutoNavigation()">
+    <mat-icon>autorenew</mat-icon>
+</button>
