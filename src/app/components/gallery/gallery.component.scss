@@ -1,8 +1,13 @@
+@import "../../../config/styling/config.scss";
+
 .container {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(5, 1fr);
   padding: 12px 24px;
+
+  animation: fadeIn 1s ease-in forwards 500ms;
+  opacity: 0;
 
   .book {
     width: 300px;
@@ -26,28 +31,39 @@
     }
   }
 
-  @media (max-width: 1920px) {
+  @media (max-width: $max-lg-width) {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (max-width: 1440px) {
+  @media (max-width: $max-md-width) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: $max-sm-width) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
+  @media (max-width: $max-xs-width) {
+    display: flex;
+    flex-direction: column;
+
+    .book {
+      width: fit-content;
+
+      img {
+        max-width: fit-content;
+      }
+    }
   }
 }
 
-.auto-navigation-button {
+.navigation-buttons {
+  animation: fadeIn 1s ease-in forwards 1s;
   position: sticky;
   bottom: 24px;
-  left: 24px;
-  background-color: rgba(#ffffff, 0.75);
-  color: rgb(50, 50, 50);
-  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 24px;
+  opacity: 0;
 }

@@ -1,6 +1,13 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BookModel } from 'src/app/models/book-cover.model';
-import { BookCoverService } from 'src/app/services/book-cover.service';
+
+/**
+ * TODO:
+ *  title
+ *  author
+ *  rating (stars)
+ *  goodreadsUrl
+ */
 
 @Component({
   selector: 'app-cover',
@@ -10,6 +17,4 @@ import { BookCoverService } from 'src/app/services/book-cover.service';
 export class CoverComponent {
   @Input()
   book?: BookModel;
-
-  readonly loading$ = inject(BookCoverService).observeLoading();
 }

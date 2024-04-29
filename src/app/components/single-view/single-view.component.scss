@@ -5,3 +5,8 @@
   top: 24px;
   left: 24px;
 }
+
+app-cover {
+  animation: fadeInOut 9500ms ease-in infinite 500ms;
+  opacity: 0;
+}
