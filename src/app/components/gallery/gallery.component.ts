@@ -40,10 +40,10 @@ export class GalleryComponent implements OnDestroy {
   onStartAutoNavigation() {
     this.router.navigateByUrl('/auto-view');
     this.isAutoNavButtonVisible = false;
-    this.autoNavPrevBookIds$.subscribe(() =>
-      this.autoNavigation(this.bookCoverService.books)
-    );
-    this.autoNavigation(this.bookCoverService.books, 0);
+    // this.autoNavPrevBookIds$.subscribe(() =>
+    //   this.autoNavigation(this.bookCoverService.books)
+    // );
+    // this.autoNavigation(this.bookCoverService.books, 0);
   }
 
   private navigateToBook(id: string, delayInMs: number = 0): Promise<boolean> {
@@ -55,23 +55,23 @@ export class GalleryComponent implements OnDestroy {
     });
   }
 
-  private autoNavigation(books: BookModel[], delayInMs = 3 * 1000) {
-    const nextBookIds = books
-      .filter((book) => !this.autoNavPrevBookIds$.value.includes(book.id ?? ''))
-      .map((book) => book.id ?? '')
-      .filter(Boolean);
+  // private autoNavigation(books: BookModel[], delayInMs = 3 * 1000) {
+  //   const nextBookIds = books
+  //     .filter((book) => !this.autoNavPrevBookIds$.value.includes(book.id ?? ''))
+  //     .map((book) => book.id ?? '')
+  //     .filter(Boolean);
 
-    if (nextBookIds.length > 0) {
-      setTimeout(() => {
-        this.navigateToBook(nextBookIds[nextBookIds.length - 1]).then(() => {
-          this.autoNavPrevBookIds$.next([
-            ...this.autoNavPrevBookIds$.value,
-            nextBookIds[nextBookIds.length - 1],
-          ]);
-        });
-      }, delayInMs);
-    } else {
-      this.autoNavPrevBookIds$.next([]);
-    }
-  }
+  //   if (nextBookIds.length > 0) {
+  //     setTimeout(() => {
+  //       this.navigateToBook(nextBookIds[nextBookIds.length - 1]).then(() => {
+  //         this.autoNavPrevBookIds$.next([
+  //           ...this.autoNavPrevBookIds$.value,
+  //           nextBookIds[nextBookIds.length - 1],
+  //         ]);
+  //       });
+  //     }, delayInMs);
+  //   } else {
+  //     this.autoNavPrevBookIds$.next([]);
+  //   }
+  // }
 }
