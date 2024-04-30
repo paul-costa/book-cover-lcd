@@ -68,10 +68,9 @@ export class SingleViewComponent implements OnDestroy {
     this.bookChangeInterval = setInterval(() => {
       let bookId: string;
 
-      if (this.books[currentBookNr + 1] != null) {
-        currentBookNr++;
-        bookId = this.books[currentBookNr]?.id as string;
-      }
+      currentBookNr =
+        this.books[currentBookNr + 1] != null ? (currentBookNr += 1) : 0;
+      bookId = this.books[currentBookNr]?.id as string;
 
       this.currentBook = undefined;
       setTimeout(() => this.setBookById(bookId));
